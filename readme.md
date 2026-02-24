@@ -25,7 +25,7 @@ This module creates the following resources.
 * public_subnet_cidrs - (Required).
 * private_subnet_cidrs - (Required).
 * database_subnet_cidrs - (Required).
-* is_peering - (Optional).
+* is_peering_required - (Optional).
 * tags - (Optional)
 
 ### Outputs 

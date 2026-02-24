@@ -69,7 +69,7 @@ variable "nat_gateway_tags" {
 }
 
 # Peering connection required or not
-variable "is_peering" {
+variable "is_peering_required" {
   type = bool
   default = true
 }

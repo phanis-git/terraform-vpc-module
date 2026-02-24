@@ -37,7 +37,7 @@ resource "aws_vpc_peering_connection" "default" {
 #     resource "aws_route" "accepter_to_requester_route" {
     resource "aws_route" "default_peering" {
       route_table_id            = data.aws_route_table.default.id  #default route table id
-      destination_cidr_block    = var.aws_vpc_cidr_block
+      destination_cidr_block    = var.vpc_cidr
       vpc_peering_connection_id = aws_vpc_peering_connection.default[count.index].id
         count = var.is_peering ? 1 : 0
       #  depends_on = [ aws_vpc_peering_connection.default ]

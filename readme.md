@@ -19,12 +19,12 @@ This module creates the following resources.
 * Default VPC main route table to created VPC route
 
 ### Inputs
-* aws_vpc_cidr_block - (Required). User must supply the CIDR for VPC.
+* vpc_cidr - (Required). User must supply the CIDR for VPC.
 * project_name - (Required). User must supply the project name.
-* environment_name - (Required). User must supply the environment name.
-* public_subnet_cird - (Required).
-* private_subnet_cird - (Required).
-* database_subnet_cird - (Required).
+* environment - (Required). User must supply the environment name.
+* public_subnet_cidrs - (Required).
+* private_subnet_cidrs - (Required).
+* database_subnet_cidrs - (Required).
 * is_peering - (Optional).
 * tags - (Optional)
 

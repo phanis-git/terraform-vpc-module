@@ -1,6 +1,6 @@
 # Creating VPC
 resource "aws_vpc" "main" {
-    cidr_block       = var.aws_vpc_cidr_block
+    cidr_block       = var.vpc_cidr
     instance_tenancy = "default"
     enable_dns_hostnames = true
     tags = merge(
@@ -28,10 +28,10 @@ resource "aws_internet_gateway" "main" {
 # Creating Subnets for public , private and database
 # public subnet
 resource "aws_subnet" "public" {
-count = length(var.public_subnet_cird)
+count = length(var.public_subnet_cidrs)
   vpc_id     = aws_vpc.main.id
     map_public_ip_on_launch = true
-  cidr_block = var.public_subnet_cird[count.index]
+  cidr_block = var.public_subnet_cidrs[count.index]
    availability_zone = local.availability_zone[count.index]
   tags =  merge(
         var.public_subnet_tags,
@@ -43,9 +43,9 @@ count = length(var.public_subnet_cird)
 }
 # private subnet
 resource "aws_subnet" "private" {
-count = length(var.private_subnet_cird)
+count = length(var.private_subnet_cidrs)
   vpc_id     = aws_vpc.main.id
-  cidr_block = var.private_subnet_cird[count.index]
+  cidr_block = var.private_subnet_cidrs[count.index]
    availability_zone = local.availability_zone[count.index]
   tags =  merge(
         var.private_subnet_tags,
@@ -57,9 +57,9 @@ count = length(var.private_subnet_cird)
 }
 # database subnet
 resource "aws_subnet" "database" {
-count = length(var.database_subnet_cird)
+count = length(var.database_subnet_cidrs)
   vpc_id     = aws_vpc.main.id
-  cidr_block = var.database_subnet_cird[count.index]
+  cidr_block = var.database_subnet_cidrs[count.index]
    availability_zone = local.availability_zone[count.index]
    map_public_ip_on_launch = true
   tags =  merge(
@@ -160,19 +160,19 @@ resource "aws_nat_gateway" "nat" {
 # Route table association
 # public   as we have two subnets us-east-1a and us-east-1b we need to toop
 resource "aws_route_table_association" "public" {
-    count = length(var.public_subnet_cird)
+    count = length(var.public_subnet_cidrs)
   subnet_id      =   aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
 }
 # private
 resource "aws_route_table_association" "private" {
-    count = length(var.private_subnet_cird)
+    count = length(var.private_subnet_cidrs)
   subnet_id      =   aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private.id
 }
 # Database
 resource "aws_route_table_association" "database" {
-    count = length(var.database_subnet_cird)
+    count = length(var.database_subnet_cidrs)
   subnet_id      =   aws_subnet.database[count.index].id
   route_table_id = aws_route_table.database.id
 }

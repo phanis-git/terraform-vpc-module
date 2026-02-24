@@ -1,10 +1,10 @@
-variable "aws_vpc_cidr_block" {
+variable "vpc_cidr" {
   type = string
 }
 variable "project_name" {
   type = string
 }
-variable "environment_name" {
+variable "environment" {
   type = string
 }
 
@@ -18,13 +18,13 @@ variable "igw_tags" {
 }
 
 # subnet
-variable "public_subnet_cird" {
+variable "public_subnet_cidrs" {
   type = list
 }
-variable "private_subnet_cird" {
+variable "private_subnet_cidrs" {
   type = list
 }
-variable "database_subnet_cird" {
+variable "database_subnet_cidrs" {
     type = list
 }
 
